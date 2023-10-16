@@ -1,5 +1,7 @@
 local Lexer = {}
 
+Lexer.version = "0.1"
+
 ---@enum TypeId
 Lexer.TypeId = {
     Text = "text",
