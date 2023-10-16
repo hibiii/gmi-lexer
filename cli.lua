@@ -46,9 +46,28 @@ end
 local raw_lexer_output = false
 local files = {}
 
+local help = function()
+print [[usage: <command> <options> file [more_files [...] ]
+options:
+--help:     show this
+--lexer:    show only the output of the lexer
+--no-style: don't use terminal styles
+]]
+end
+
+if #arg == 0 then
+    help()
+    return
+end
+
 for _, argv in ipairs(arg) do
-    if argv == "--debug-lexer" then
+    if argv == "--lexer" then
         raw_lexer_output = true
+    elseif argv == "--help" then
+        help()
+        return
+    elseif argv == "--no-style" then
+        Format.setStyle(Styles.none)
     else
         files[#files+1] = argv
     end
