@@ -4,6 +4,9 @@ local TypeId = {
     Link = "link",
     PreToggle = "pre-toggle",
     PreLine = "pre-line",
+    Heading = "heading",
+    ListItem = "list-item",
+    Quote = "quote",
 }
 
 ---@class Element
@@ -24,6 +27,19 @@ local TypeId = {
 
 ---@class PreformatLine: Element
 ---@field type TypeId PreLine
+---@field content string
+
+---@class HeadingLine: Element
+---@field type TypeId Heading
+---@field level integer
+---@field content string
+
+---@class ListItem: Element
+---@field type TypeId ListItem
+---@field content string
+
+---@class QuoteLine: Element
+---@field type TypeId Quote
 ---@field content string
 
 return TypeId

@@ -38,6 +38,35 @@ Lexer.iterFromIter = function(iter)
                 friendly_name = friendly_name,
             }
         end
+        if data:match("^#+") then
+            local level =
+                   data:match("^###") and 3
+                or data:match("^##[^#]") and 2
+                or data:match("^#[^#]") and 1
+            local content = data:match("^##?#?%s*(.*)")
+            ---@type HeadingLine
+            return {
+                type = TypeId.Heading,
+                level = level,
+                content = content,
+            }
+        end
+        if data:match("^%* ") then
+            local content = data:sub(3)
+            ---@type ListItem
+            return {
+                type = TypeId.ListItem,
+                content = content,
+            }
+        end
+        if data:match("^>") then
+            local content = data:sub(2)
+            ---@type QuoteLine
+            return {
+                type = TypeId.Quote,
+                content = content,
+            }
+        end
         local content = data
         ---@type TextLine
         return {
